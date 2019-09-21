@@ -1,4 +1,4 @@
-import hashlib,os,files
+import hashlib,os,files,time
 def md5(fname):
     try:
         hash_md5 = hashlib.md5()
@@ -17,6 +17,19 @@ file3=files.file("/tmp/file3.txt")
 file1.hash=md5(file1.pathname)
 file2.hash=md5(file2.pathname)
 file3.hash=md5(file3.pathname)
-print(file1.hash)
-print(file2.hash)
-print(file3.hash)
+
+md5file="/tmp/.md5file"
+
+def file_hash_exist():
+    if not os.path.exists(md5file):
+         print("it doesn't exist")
+         print("creating 1 for you ....")
+         time.sleep(2)
+         f= open(md5file,"w+")
+
+    else :
+        print("it exists ")
+
+
+
+file_hash_exist()
