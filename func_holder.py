@@ -20,24 +20,36 @@ file3.hash=md5(file3.pathname)
 
 md5file="/tmp/.md5file"
 
-def file_hash_exist():
+def file_hash_exist_solve():
     if not os.path.exists(md5file):
          print("it doesn't exist")
          print("creating 1 for you ....")
          time.sleep(2)
          f= open(md5file,"w+")
          f.close()
-         add_data_hash()
+         add_data_hashfile()
 
     else :
         print("it exists ")
-        add_data_hash()
-def add_data_hash():
+        add_data_hashfile()
+
+def add_data_hashfile():
     with open(md5file,"w") as file:
-        file.write(file1.pathname+":"+file1.hash+"\n")
-        file.write(file2.pathname+":"+file2.hash+"\n")
-        file.write(file3.pathname+":"+file3.hash+"\n")
+        file.writelines(file1.pathname+":"+file1.hash+"\n")
+        file.writelines(file2.pathname+":"+file2.hash+"\n")
+        file.writelines(file3.pathname+":"+file3.hash+"\n")
     file.close()
 
-
-file_hash_exist()
+def compare_data():
+    with open(md5file,"r") as file:
+        x=file.readlines()
+    for element in range(len(x)):
+        z=x[element].split(":")
+        if (z[1].rstrip("\n")==file1.hash):
+            print("yes file1 is the same")
+            return
+        if (z[1].rstrip("\n")==file1.hash):
+            print("yes file1 is the same")
+    print(z)
+file_hash_exist_solve()
+compare_data()
