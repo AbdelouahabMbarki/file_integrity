@@ -26,10 +26,18 @@ def file_hash_exist():
          print("creating 1 for you ....")
          time.sleep(2)
          f= open(md5file,"w+")
+         f.close()
+         add_data_hash()
 
     else :
         print("it exists ")
-
+        add_data_hash()
+def add_data_hash():
+    with open(md5file,"w") as file:
+        file.write(file1.pathname+":"+file1.hash+"\n")
+        file.write(file2.pathname+":"+file2.hash+"\n")
+        file.write(file3.pathname+":"+file3.hash+"\n")
+    file.close()
 
 
 file_hash_exist()
