@@ -3,15 +3,16 @@ from __future__ import absolute_import
 import hashlib,os,files,time,sys
 from io import open
 def md5(fname):
-    try:
+     if os.path.exists(fname):
         hash_md5 = hashlib.md5()
         with open(fname, u"rb") as f:
             for chunk in iter(lambda: f.read(4096), ""):
                 hash_md5.update(chunk)
         return hash_md5.hexdigest()
-    except OSError, e:
-        print fname + u"  not found"
-        sys.exit()
+    else :
+        f= open(fname,u"w+")
+        f.close()
+        return md5(fname)
 
 def file_hash_exist_solve():
     if not os.path.exists(md5file):
